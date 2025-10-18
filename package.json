@@ -1,0 +1,34 @@
+{
+  "name": "gmo-kline-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for GMO Coin FX KLINE API",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "gmo-kline-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mcp",
+    "gmo",
+    "forex",
+    "kline"
+  ],
+  "author": "GMO KLine MCP Server Contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mako3333/gmo-kline-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mako3333/gmo-kline-mcp/issues"
+  },
+  "homepage": "https://github.com/Mako3333/gmo-kline-mcp#readme",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "axios": "^1.7.9"
+  }
+}
+
