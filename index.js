@@ -35,7 +35,19 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           properties: {
             symbol: {
               type: 'string',
-              description: '取扱銘柄 (例: USD_JPY, EUR_JPY, GBP_JPY, AUD_JPY, NZD_JPY, CAD_JPY, CHF_JPY, EUR_USD, GBP_USD, AUD_USD)',
+              description: '取扱銘柄。以下の10通貨ペアのみ有効。',
+              enum: [
+                'USD_JPY',
+                'EUR_JPY',
+                'GBP_JPY',
+                'AUD_JPY',
+                'NZD_JPY',
+                'CAD_JPY',
+                'CHF_JPY',
+                'EUR_USD',
+                'GBP_USD',
+                'AUD_USD',
+              ],
             },
             priceType: {
               type: 'string',
@@ -49,10 +61,26 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
             date: {
               type: 'string',
-              description: '日付: YYYYMMDD形式(1min～1hourの場合、20231028以降) または YYYY形式(4hour以上の場合)',
+              description:
+                '日付。1hourまでの足(1min〜1hour)はYYYYMMDD、4hour以上の足(4hour〜1month)はYYYY。例: 1min/"20241028"、1day/"2024"',
+              pattern: '^(\\d{8}|\\d{4})$',
             },
           },
           required: ['symbol', 'priceType', 'interval', 'date'],
+          examples: [
+            {
+              symbol: 'USD_JPY',
+              priceType: 'ASK',
+              interval: '1min',
+              date: '20241028',
+            },
+            {
+              symbol: 'EUR_USD',
+              priceType: 'BID',
+              interval: '1day',
+              date: '2024',
+            },
+          ],
         },
       },
     ],
@@ -167,4 +195,3 @@ main().catch((error) => {
   console.error('Server error:', error);
   process.exit(1);
 });
-

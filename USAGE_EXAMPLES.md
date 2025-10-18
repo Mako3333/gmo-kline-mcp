@@ -15,11 +15,18 @@ MCPサーバーは標準入出力(stdio)を使用してJSON-RPCメッセージ�
 
 ```bash
 # ツール一覧の取得
+
 echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node /home/ubuntu/gmo-kline-mcp/index.js
 
 # KLineデータの取得
-echo '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"get_klines","arguments":{"symbol":"USD_JPY","priceType":"ASK","interval":"1day","date":"2024"}}}' | node /home/ubuntu/gmo-kline-mcp/index.js
+echo '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"get_klines","arguments":{"symbol":"USD_JPY","priceType":"ASK","interval":"1day","date":"2025"}}}' | node /home/ubuntu/gmo-kline-mcp/index.js
 ```
+
+### 重要: 日付指定ルール
+
+- 1hourまでの足(1min〜1hour): `YYYYMMDD`（例: `20241028`）
+- 4hour以上の足(4hour〜1month): `YYYY`（例: `2024`）
+- 不一致の場合はサーバーがエラーメッセージを返します。
 
 ## Claude Desktopでの設定
 
@@ -244,4 +251,3 @@ GBP/USDの2024年の週足データを取得して、トレンドを分析して
 
 ### 複数銘柄の相関分析
 複数の銘柄のデータを取得して、相関関係を分析できます。
-

@@ -136,10 +136,16 @@ GMOコイン外国為替FXのKLine(ローソク足)データを取得します�
 
 | パラメータ | 型 | 必須 | 説明 |
 |-----------|-----|------|------|
-| symbol | string | ✓ | 取扱銘柄 (USD_JPY, EUR_JPY, GBP_JPY, AUD_JPY, NZD_JPY, CAD_JPY, CHF_JPY, EUR_USD, GBP_USD, AUD_USD) |
+| symbol | string | ✓ | 取扱銘柄。以下の10通貨ペアのみ: USD_JPY, EUR_JPY, GBP_JPY, AUD_JPY, NZD_JPY, CAD_JPY, CHF_JPY, EUR_USD, GBP_USD, AUD_USD |
 | priceType | string | ✓ | 価格タイプ: BID(売値) または ASK(買値) |
 | interval | string | ✓ | 時間軸: 1min, 5min, 10min, 15min, 30min, 1hour, 4hour, 8hour, 12hour, 1day, 1week, 1month |
-| date | string | ✓ | 日付: YYYYMMDD形式(1min～1hourの場合) または YYYY形式(4hour以上の場合) |
+| date | string | ✓ | 日付。1hourまで(1min〜1hour)はYYYYMMDD、4hour以上(4hour〜1month)はYYYY |
+
+#### 日付指定ルール（重要）
+
+- 1min, 5min, 10min, 15min, 30min, 1hour → `YYYYMMDD` 例: `20241028`
+- 4hour, 8hour, 12hour, 1day, 1week, 1month → `YYYY` 例: `2024`
+- 形式自体はどちらも受け付けますが、サーバー側で interval に応じた整合性チェックを行い、不一致の場合はエラーを返します。
 
 #### レスポンス
 
@@ -202,4 +208,3 @@ KLineデータの配列を返します。各データには以下のフィール
 ---
 
 Made with ❤️ by the community
-
