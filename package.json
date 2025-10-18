@@ -26,6 +26,12 @@
   },
   "homepage": "https://github.com/Mako3333/gmo-kline-mcp#readme",
   "license": "MIT",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
     "axios": "^1.7.9"

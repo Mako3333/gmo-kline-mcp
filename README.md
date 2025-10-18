@@ -3,12 +3,14 @@
 [![CI](https://github.com/Mako3333/gmo-kline-mcp/workflows/CI/badge.svg)](https://github.com/Mako3333/gmo-kline-mcp/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+[![npm](https://img.shields.io/npm/v/gmo-kline-mcp.svg)](https://www.npmjs.com/package/gmo-kline-mcp)
 
 GMOコイン外国為替FXのKLine(ローソク足)データ取得APIをModel Context Protocol(MCP)サーバーとして提供します。Claude Desktop、CursorなどのMCPクライアントから簡単に為替レートのヒストリカルデータを取得できます。
 
 ## 📋 目次
 
 - [特徴](#特徴)
+- [クイックスタートnpx](#-クイックスタートnpx)
 - [インストール](#インストール)
 - [使用方法](#使用方法)
 - [対応環境](#対応環境)
@@ -29,6 +31,21 @@ GMOコイン外国為替FXのKLine(ローソク足)データ取得APIをModel Co
 - **ヒストリカルデータ**: 過去のローソク足データを日付指定で取得
 - **パラメータバリデーション**: 適切なエラーメッセージによる入力検証
 - **クロスプラットフォーム**: Windows、macOS、Linuxで動作
+
+## ⚡ クイックスタート(npx)
+
+ローカルにクローンせず、npxで直接実行できます。
+
+- ツール一覧を取得（bash/zsh）
+  - `echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | npx -y gmo-kline-mcp`
+- ツール一覧を取得（PowerShell）
+  - `$j='{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'; $j | & npx -y gmo-kline-mcp`
+
+Claude Desktop 登録（推奨）
+- `command`: `npx`
+- `args`: `["-y", "gmo-kline-mcp"]`
+
+既存手順（クローンして使う）を利用する場合は次の「インストール」を参照してください。
 
 ## 🚀 インストール
 
@@ -53,6 +70,19 @@ npm install
 ## 📖 使用方法
 
 ### MCPクライアントへの登録
+
+#### 推奨: npxでの登録（macOS/Linux/Windows共通）
+
+```json
+{
+  "mcpServers": {
+    "gmo-kline": {
+      "command": "npx",
+      "args": ["-y", "gmo-kline-mcp"]
+    }
+  }
+}
+```
 
 #### Claude Desktop
 
@@ -125,6 +155,15 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node index.j
 # KLineデータの取得
 echo '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"get_klines","arguments":{"symbol":"USD_JPY","priceType":"ASK","interval":"1day","date":"2024"}}}' | node index.js 2>/dev/null
 ```
+
+#### npxでの直接実行
+
+- bash/zsh:
+  - `echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | npx -y gmo-kline-mcp`
+- PowerShell:
+  - `"$j='{""jsonrpc"": ""2.0"", ""id"": 1, ""method"": ""tools/list"", ""params"": {}}'; $j | & npx -y gmo-kline-mcp"`
+
+PowerShellの注意: パイプ先を実行する際は呼び出し演算子 `&` を付けてください。
 
 ## 🛠️ ツール仕様
 
